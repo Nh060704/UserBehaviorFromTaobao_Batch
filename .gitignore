@@ -1,0 +1,18 @@
+# ===== 原始数据：约 3.67GB，超过 GitHub 单文件 100MB 上限，禁止上传 =====
+UserBehavior.csv
+*.csv
+
+# ===== 抽样与本地中间数据 =====
+sample_ub.csv
+DockerData/
+
+# ===== 临时与输出文件 =====
+output/
+*.log
+tmp/
+
+# ===== 编辑器与系统文件 =====
+.idea/
+.vscode/
+Thumbs.db
+Desktop.ini

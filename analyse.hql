@@ -89,14 +89,9 @@ limit 10;
 
 --5、基于RFM模型找出有价值的用户
 
-/*
-RFM模型是衡量客户价值和客户创利能力的重要工具和手段，其中由3个要素构成了数据分析最好的指标，分别是：
-R-Recency（最近一次购买时间）
-F-Frequency（消费频率）
-M-Money（消费金额）
-*/
+-- RFM：R = 最近一次购买距今几天，F = 购买次数（数据集无金额，M 不分析）
 
---R-Recency（最近一次购买时间）, R值越高，一般说明用户比较活跃
+-- R：距离最近一次购买的天数，越小越活跃
 select user_id,
        datediff('2017-12-04', max(datetime)) as R,
        dense_rank() over(order by datediff('2017-12-04', max(datetime))) as R_rank
@@ -105,7 +100,7 @@ where behavior_type = 'buy'
 group by user_id
 limit 10;
 
---F-Frequency（消费频率）, F值越高，说明用户越忠诚
+-- F：购买次数，越大越忠诚
 select user_id,
        count(1) as F,
        dense_rank() over(order by count(1) desc) as F_rank
@@ -115,15 +110,7 @@ group by user_id
 limit 10;
 
 --对用户进行评分
-/*
-对有购买行为的用户按照排名进行分组，共划分为5组，
-前  - 1/5 的用户打5分
-前 1/5 - 2/5 的用户打4分
-前 2/5 - 3/5 的用户打3分
-前 3/5 - 4/5 的用户打2分
-前 4/5 - 的用户打1分
-按照这个规则分别对用户时间间隔排名打分和购买频率排名打分，最后把两个分数合并在一起作为该名用户的最终评分。
-*/
+-- R、F 分别按排名用 NTILE(5) 分 5 档打分（前 20% 得 5 分），合并成总分
 with cte as(
 select user_id,
        datediff('2017-12-04', max(datetime)) as R,

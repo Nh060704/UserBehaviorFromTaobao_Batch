@@ -21,15 +21,12 @@ Hive / HiveQL · Hadoop 离线批处理 · 数据清洗 · 窗口函数（`DENSE
 | --- | --- |
 | `table.hql` | 建表、数据加载、数据清洗（全字段去重、时间戳格式化、异常时间与行为枚举过滤） |
 | `analyse.hql` | 六大分析 SQL：流量与购物 / 转化漏斗 / 行为习惯 / RFM 用户价值 / 商品与类目排行 |
-| `复现.sql` | 一键复现入口 |
-| `复现步骤.md` | 本机（WSL Docker + HiveServer2）完整复现指南，含 500 万条抽样方案与常见坑 |
 | `用户行为数据分析.md` | 原始分析报告：SQL、可视化与业务结论 |
-| `UserBehaviorFromTaobao项目_复现手册（本机版）.docx` | 复现手册 |
 | `UserBehavior.csv` | 原始数据（已被 `.gitignore` 排除，不参与提交） |
 
 ## 快速复现
 
-1. 启动本机 Hive 环境（WSL Docker，见 `复现步骤.md` 第二节）
+1. 启动本机 Hive 环境（WSL Docker 中的 HiveServer2）
 2. 建议先用 **500 万条抽样**跑通全流程（全程约 10 分钟），再跑全量复现原文数字（全程 1~2 小时）
 3. 执行顺序：建表（`table.hql`）→ 加载数据 → 清洗 → 六大分析（`analyse.hql`）
 

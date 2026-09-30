@@ -16,3 +16,7 @@ tmp/
 .vscode/
 Thumbs.db
 Desktop.ini
+
+# ===== 本地保留、不上传的文件 =====
+复现.sql
+UserBehaviorFromTaobao项目_复现手册（本机版）.docx

@@ -6,7 +6,6 @@
 字段数：5
 */
 
--- 建表
 drop table if exists user_behavior;
 create table user_behavior (
 `user_id` string comment '用户ID',
@@ -19,11 +18,7 @@ row format delimited
 fields terminated by ','
 lines terminated by '\n';
 
--- 加载数据
--- 注意：下方路径 '/home/getway/UserBehavior.csv' 是原 Hadoop 集群内路径，本机 Docker 复现无法直接使用。
--- 本机版请改用容器内 beeline 加载（数据先拷入容器），例如：
---   wsl -d HiveUbuntu -- docker exec hive-server beeline -u jdbc:hive2://localhost:10000
---   -e "LOAD DATA LOCAL INPATH '/tmp/sample_ub.csv' OVERWRITE INTO TABLE user_behavior;"
+-- 加载数据（本机 Docker 复现改用容器 beeline，见 README）
 LOAD DATA LOCAL INPATH '/home/getway/UserBehavior.csv'
 OVERWRITE INTO TABLE user_behavior ;
 
